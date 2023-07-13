@@ -22,19 +22,30 @@ app.listen(port, () => console.log(`API server ready on http://localhost:${port}
 
 import { Gitlab } from '@gitbeaker/rest';
 
-// Test variables for the codewise-test project
-const host_codewise_test  = 'https://gitlab.com/api/v4/users/dplascenciap/projects?access_token=glpat-ZWJxMautAowswzm6buCZ'
-const token_codewise_test = 'glpat-ZWJxMautAowswzm6buCZ'
+// Test variables for the test project
+const user_name     = 'dplascenciap'
+const token_project = 'glpat-ZWJxMautAowswzm6buCZ'
+const host_project  = 'https://gitlab.com/api/v4/users/' + user_name + '/projects?access_token=' + token_project
 
 console.log('Start.')
 
 const apiProject = new Gitlab({
-  host: host_codewise_test,
-  token: token_codewise_test,
+  host: host_project,
+  token: token_project,
+});
+
+const apiUser = new Gitlab({
+  token: token_project,
 });
 
 // Get list of projects
-let projects = await apiProject.Projects.all({ maxPages: 2 });
+console.log('-----------------------')
+const projects = await apiProject.Projects.all({ maxPages: 2 });
 console.log(projects)
+
+// Get current user
+console.log('-----------------------')
+const currentUser = await apiUser.Users.showCurrentUser();
+console.log(currentUser.name)
 
 console.log('Done.')
