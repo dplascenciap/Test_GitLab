@@ -23,19 +23,18 @@ app.listen(port, () => console.log(`API server ready on http://localhost:${port}
 import { Gitlab } from '@gitbeaker/rest';
 
 // Test variables for the codewise-test project
-const host_codewise_test  = 'https://gitlab.com/api/v4/users/mikey.walkerrr/projects?access_token=glpat-xg9YG5znqdqLznz3hgxy'
-const token_codewise_test = 'glpat-xg9YG5znqdqLznz3hgxy'
+const host_codewise_test  = 'https://gitlab.com/api/v4/users/dplascenciap/projects?access_token=glpat-ZWJxMautAowswzm6buCZ'
+const token_codewise_test = 'glpat-ZWJxMautAowswzm6buCZ'
 
 console.log('Start.')
 
-const api = new Gitlab({
+const apiProject = new Gitlab({
   host: host_codewise_test,
   token: token_codewise_test,
 });
 
 // Get list of projects
-api.host = host_codewise_test
-let projects = await api.Projects.all({ maxPages: 2 });
+let projects = await apiProject.Projects.all({ maxPages: 2 });
 console.log(projects)
 
 console.log('Done.')
