@@ -39,13 +39,17 @@ const apiUser = new Gitlab({
 });
 
 // Get list of projects
-console.log('-----------------------')
-const projects = await apiProject.Projects.all({ maxPages: 2 });
+console.log('-----------------------> Projects')
+let projects = await apiProject.Projects.all()
 console.log(projects)
+console.log(projects[0].namespace)
 
 // Get current user
-console.log('-----------------------')
+console.log('-----------------------> Users')
 const currentUser = await apiUser.Users.showCurrentUser();
+console.log(currentUser)
+console.log(currentUser.id)
 console.log(currentUser.name)
+console.log(currentUser.username)
 
 console.log('Done.')
